@@ -1,0 +1,30 @@
+{
+    "name": "waffle-factory",
+    "version": "1.0.0",
+    "lockfileVersion": 3,
+    "requires": true,
+    "packages": {
+      "": {
+        "name": "waffle-factory",
+        "version": "1.0.0",
+        "license": "MIT",
+        "devDependencies": {
+          "eslint": "^8.57.0"
+        }
+      },
+      "node_modules/eslint": {
+        "version": "8.57.0",
+        "resolved": "https://registry.npmjs.org/eslint/-/eslint-8.57.0.tgz",
+        "integrity": "sha512-GGL1GCZFT+Y+V3vZW+fiPj2Fw1Zr4Lr6Tw2e+gA9iI5k9WmcljQDo+iHQvkmvYqWW5u6ybnJ3zslRzGlgnYWWw==",
+        "dev": true,
+        "bin": {
+          "eslint": "bin/eslint.js"
+        },
+        "engines": {
+          "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+        }
+      }
+    },
+    "dependencies": {}
+  }
+  

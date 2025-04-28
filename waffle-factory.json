@@ -1,0 +1,21 @@
+{
+  "name": "waffle-factory",
+  "version": "1.0.0",
+  "description": "A fun waffle name generator web app.",
+  "main": "app.js",
+  "scripts": {
+    "lint": "eslint app.js"
+  },
+  "keywords": [
+    "waffle",
+    "fun",
+    "html",
+    "javascript",
+    "webapp"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}

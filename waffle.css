@@ -1,0 +1,38 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #fff8f0;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.factory {
+    text-align: center;
+    background: #ffe0b2;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    background-color: #f4a261;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #e76f51;
+}
+
+#waffleOutput {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #6d4c41;
+}
