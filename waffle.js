@@ -27,3 +27,7 @@ fetch(url.searchParams.get("redirectTo")); // ❌ open redirect potential
 
 // 8. Disabled SSL verification (simulated)
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0"; // ❌ terrible idea
+
+// AWS secret simulation
+const awsSecret = "AKIAIOSFODNN7EXAMPLE"; // should trigger again
+
