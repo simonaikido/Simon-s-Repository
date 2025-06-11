@@ -7,9 +7,9 @@ output.innerHTML = "<div>" + query + "</div>"; // ❌ XSS risk
 const userInput = location.hash.substring(1); // unsanitized
 const result = eval("alert('" + userInput + "')"); // ❌ Arbitrary code exec
 
-// 3. Insecure random - should use crypto
+// 3. Insecure random - should use crypto test for secure randomness
 function getInsecureToken() {
-  return Math.random().toString(36).substring(2); // ❌ Weak randomness
+  return Math.random().toString(36).substring(3); // ❌ Weak randomness
 }
 
 // 4. Insecure DOM event injection
@@ -44,3 +44,10 @@ app.use((req, res, next) => {
 // 10. SQL injection-prone example (assuming backend context)
 const userId = req.query.id;
 db.query("SELECT * FROM users WHERE id = " + userId); // ❌ Unsanitized SQL input
+// 1. XSS via innerHTML with untrusted input
+const output = document.getElementById('waffleOutput');
+const query = window.location.search; // unsanitized user input
+output.innerHTML = "<div>" + query + "</div>"; // ❌ XSS risk
+
+// 2. Hardcoded Stripe token (bad)
+const stripeToken = "sk_live_1234567890abcdef"; // ❌ this will be flagged
