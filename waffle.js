@@ -3,51 +3,27 @@ const output = document.getElementById('waffleOutput');
 const query = window.location.search; // unsanitized user input
 output.innerHTML = "<div>" + query + "</div>"; // ❌ XSS risk
 
-// 2. Use of eval() with dynamic string
-const userInput = location.hash.substring(1); // unsanitized
-const result = eval("alert('" + userInput + "')"); // ❌ Arbitrary code exec
+// 2. Dangerous use of eval
+const userInput = "alert('pwnd')";
+eval(userInput); // ❌ eval = RCE risk
 
-// 3. Insecure random - should use crypto test for secure randomness
-function getInsecureToken() {
-  return Math.random().toString(36).substring(3); // ❌ Weak randomness
+// 3. Insecure random generation
+function getSessionToken() {
+  return Math.random().toString(36); // ❌ not cryptographically secure
 }
 
-// 4. Insecure DOM event injection
-document.getElementById('makeWaffle').addEventListener('click', function () {
-  const waffleName = document.getElementById('waffleNameInput').value;
-  document.getElementById('waffleOutput').innerHTML = `<h1>${waffleName}</h1>`; // ❌ XSS if input is not escaped
-});
+// 4. Hardcoded secret token
+const stripeSecret = "sk_live_1234567890abcdef"; // ❌ detected by Gitleaks
 
-// 5. Global variable leak
-dangerousStuff = "🚨 globally scoped"; // ❌ pollutes global scope
+// 5. Global variable pollution
+isAdmin = true; // ❌ no var/let/const, leaks globally
 
-// 6. Securely load API key from environment variable
-const apiKey = process.env.STRIPE_API_KEY; // ✅ Loaded securely
+// 6. Direct DOM manipulation with untrusted data
+document.getElementById("waffleName").innerHTML = "<img src=x onerror=alert('bad waffle')>"; // ❌ XSS again
 
-// 7. Insecure HTTP usage
-fetch("http://insecure-waffle-api.com/submit", {
-  method: "POST",
-  body: JSON.stringify({ waffle: "Belgian" }),
-}); // ❌ Plain HTTP is insecure
+// 7. No input validation for user-controlled URL
+const url = new URL(window.location.href);
+fetch(url.searchParams.get("redirectTo")); // ❌ open redirect potential
 
-// 8. Disabled TLS certificate validation (for Node.js usage)
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // ❌ Disables TLS validation
-
-// 9. Overly permissive CORS header
-const express = require('express');
-const app = express();
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // ❌ Wildcard CORS
-  next();
-});
-
-// 10. SQL injection-prone example (assuming backend context)
-const userId = req.query.id;
-db.query("SELECT * FROM users WHERE id = " + userId); // ❌ Unsanitized SQL input
-// 1. XSS via innerHTML with untrusted input
-const output = document.getElementById('waffleOutput');
-const query = window.location.search; // unsanitized user input
-output.innerHTML = "<div>" + query + "</div>"; // ❌ XSS risk
-
-// 2. Hardcoded Stripe token (bad)
-const stripeToken = "sk_live_1234567890abcdef"; // ❌ this will be flagged
+// 8. Disabled SSL verification (simulated)
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0"; // ❌ terrible idea
