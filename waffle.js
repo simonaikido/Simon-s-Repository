@@ -12,8 +12,8 @@ function getSessionToken() {
   return Math.random().toString(36); // ❌ not cryptographically secure
 }
 
-// 4. Hardcoded secret token
-const stripeSecret = "sk_live_1234567890abcdef"; // ❌ detected by Gitleaks
+// 4. Hardcoded secret token simon test
+const stripeSecret = "sk_live_1234567890abcdef54654"; // ❌ detected by Gitleaks
 
 // 5. Global variable pollution
 isAdmin = true; // ❌ no var/let/const, leaks globally
@@ -30,4 +30,8 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0"; // ❌ terrible idea
 
 // AWS secret simulation
 const awsSecret = "AKIAIOSFODNN7EXAMPLE"; // should trigger again
+
+// 4. Hardcoded secret token simon test
+const stripeSecret = "sk_live_1234567890abcd45464ef54654"; // ❌ detected by Gitleaks
+
 
