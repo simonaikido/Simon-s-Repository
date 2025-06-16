@@ -32,6 +32,6 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0"; // ❌ terrible idea
 const awsSecret = "AKIAIOSFODNN7EXAMPLE"; // should trigger again
 
 // 4. Hardcoded secret token simon test
-const stripeSecret = "sk_live_1234567890abcd45464ef54654"; // ❌ detected by Gitleaks
+const stripeSecret = "sk_live_1234654949879445646546465567890abcd45464ef54654"; // ❌ detected by Gitleaks
 
 
