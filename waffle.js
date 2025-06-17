@@ -19,7 +19,7 @@ const stripeSecret = "sk_live_1234567890abcdef54654"; // ❌ detected by Gitleak
 isAdmin = true; // ❌ no var/let/const, leaks globally
 
 // 6. Direct DOM manipulation with untrusted data
-document.getElementById("waffleName").innerHTML = "<img src=x onerror=alert('bad waffle')>"; // ❌ XSS again
+document.getElementById("waffleName2").innerHTML = "<img src=x onerror=alert('bad waffle')>"; // ❌ XSS again
 
 // 7. No input validation for user-controlled URL
 const url = new URL(window.location.href);
@@ -34,4 +34,8 @@ const awsSecret = "AKIAIOSFODNN7EXAMPLE"; // should trigger again
 // 4. Hardcoded secret token simon test
 const stripeSecret = "sk_live_1234654949879445646546465567890abcd45464ef54654"; // ❌ detected by Gitleaks
 
+// BAD: Dangerous use of eval()
+const userInput = "2 + 2";
+const result = eval(userInput);
+console.log(result);
 
