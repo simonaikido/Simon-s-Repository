@@ -27,3 +27,21 @@ fetch(url.searchParams.get("redirectTo")); // ❌ open redirect potential
 
 // 8. Disabled SSL verification (simulated)
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0"; // ❌ terrible idea
+
+const awsKey = "AKIAFAKEKEY12434533456";
+// 9. Hardcoded AWS key
+// ❌ detected by Gitleaks
+// 10. Using deprecated APIs
+const oldApi = new XMLHttpRequest();
+oldApi.open("GET", "https://example.com/api/old", true); // ❌ deprecated API usage
+// 11. Using synchronous XHR in the main thread
+oldApi.send(); // ❌ blocks the main thread
+// 12. Using localStorage for sensitive data
+
+
+
+
+localStorage.setItem("sensitiveData       
+
+
+  
