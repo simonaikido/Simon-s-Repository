@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - main
+      - simonaikido-patch-1
 
 jobs:
   aikido-local-scan-repo:
