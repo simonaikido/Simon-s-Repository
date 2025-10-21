@@ -1,16 +1,3 @@
-/**************************************************************
- * Extremely unsafe test file — FOR SCANNING ONLY (Aikido/etc.)
- * - Mixes browser and Node patterns to trigger many categories:
- *   XSS, eval/RCE, insecure randomness, secrets in code, Gitleaks,
- *   global variables, open redirects, disabled TLS, command injection,
- *   insecure deserialization, SQLi, weak crypto, insecure cookies,
- *   wildcard CORS, open file writes, insecure permissions, etc.
- **************************************************************/
-
-/* ============================
-   Browser-side insecure code
-   ============================ */
-
 // 1) XSS from unsanitized location/search (innerHTML)
 const output = document.getElementById('waffleOutput');
 const query = window.location.search; // attacker-controlled
