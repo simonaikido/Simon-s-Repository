@@ -156,3 +156,5 @@ function hashPassword(pw) {
   // insecure: single MD5 (fast, broken)
   return crypto.createHash('md5').update(pw).digest('hex'); // ❌ weak hashing
 }
+
+Beep boop
