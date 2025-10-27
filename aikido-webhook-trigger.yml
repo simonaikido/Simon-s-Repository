@@ -3,7 +3,7 @@ name: Triggered by Aikido Webhook
 
 on:
   repository_dispatch:
-    types: [aikido-issue-created]
+    types: [issue.open.created]
 
 jobs:
   handle-aikido-event:
