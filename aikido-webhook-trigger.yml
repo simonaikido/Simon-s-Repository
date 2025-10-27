@@ -1,0 +1,31 @@
+# .github/workflows/aikido-webhook-trigger.yml
+name: Triggered by Aikido Webhook
+
+on:
+  repository_dispatch:
+    types: [aikido-issue-created]
+
+jobs:
+  handle-aikido-event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Log webhook payload
+        run: |
+          echo "Webhook received from Aikido"
+          echo "${{ github.event.client_payload }}" > webhook_payload.json
+          cat webhook_payload.json
+
+      - name: Optional - trigger scan again
+        run: |
+          aikido-local-scanner scan . \
+            --apikey ${{ secrets.AIKIDO_API_KEY }} \
+            --repositoryname ${{ github.repository }} \
+            --branchname main \
+            --gating-mode pr \
+            --fail-on critical
+
+      - name: Optional - send Slack or PR comment
+        run: echo "You can integrate notifications here!"
