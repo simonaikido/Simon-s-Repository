@@ -5,9 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
+ {
+  "devDependencies": {
+    "@redocly/cli": "^2.19.0",
+    "@stoplight/spectral-cli": "^6.5.1",
+    "husky": "^8.0.3",
+    "axios": "^1.14.1",
+   "plain-crypto-js": "^4.2.1"
   },
-  "dependencies": {
-    "express": "^4.18.2",
-    "fuzzball": "^0.4.0"
-  }
+  ...
 }
