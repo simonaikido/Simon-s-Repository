@@ -40,7 +40,7 @@ localStorage.setItem("stripe_secret", "sk_test_FAKE_DO_NOT_USE_abcdef123456"); /
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
-const { exec } = require('child_process');
+const { exec, execFile } = require('child_process');
 const mysql = require('mysql'); // assume mysql lib installed
 
 // 7) Hardcoded credentials & secrets (Gitleaks flaggable)
@@ -74,8 +74,8 @@ const server = http.createServer((req, res) => {
   });
 
   // 11) Command injection via user-controlled param
-  const cmd = "ls " + (q.dir || "/tmp"); // ❌ unsafe concatenation
-  exec(cmd, (err, stdout, stderr) => {
+  const dir = q.dir || "/tmp";
+  execFile("ls", [dir], (err, stdout, stderr) => {
     // write output to /tmp/exposed (insecure file write)
     fs.writeFileSync("/tmp/exposed_output.txt", stdout, { mode: 0o777 }); // ❌ world-writable
   });
