@@ -66,8 +66,8 @@ const server = http.createServer((req, res) => {
     database: "waffles"
   });
   const unsafeUser = q.user || "guest";
-  const sql = "SELECT * FROM users WHERE username = '" + unsafeUser + "';"; // ❌ SQLi
-  conn.query(sql, (err, rows) => {
+  const sql = "SELECT * FROM users WHERE username = ?;";
+  conn.query(sql, [unsafeUser], (err, rows) => {
     // return rows unsafely
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(rows));
