@@ -107,7 +107,16 @@ const server = http.createServer((req, res) => {
     req.on("data", c => file += c);
     req.on("end", () => {
       // no validation, allow path traversal
-      fs.writeFileSync("/tmp/" + (q.filename || "upload.txt"), file); // ❌ path traversal / arbitrary write
+      const pathMod = require("path");
+      const baseFull = pathMod.resolve("/tmp");
+      const target = pathMod.join(baseFull, String(q.filename || "upload.txt"));
+      const rel = pathMod.relative(baseFull, target);
+      if (rel === '..' || rel.startsWith(`..${pathMod.sep}`) || pathMod.isAbsolute(rel)) {
+        res.statusCode = 400;
+        res.end("Invalid file path");
+        return;
+      }
+      fs.writeFileSync(target, file);
       res.end("uploaded");
     });
     return;
